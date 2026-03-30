@@ -68,14 +68,14 @@ const AddLinkModal = () => {
   return (
     <>
       <Dialog.Portal>
-        <Dialog.Overlay className="fixed inset-0 backdrop-blur-sm bg-gray-800 bg-opacity-50 w-full" />
-        <Dialog.Content className="contentShow fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 rounded-2xl bg-white p-6 sm:p-8 lg:max-w-3xl w-[350px] sm:w-[500px] shadow-lg md:max-w-lg max-md:max-w-lg focus:outline-none">
-          <div className="flex flex-row justify-between items-center mb-4">
-            <Dialog.Title className="text-xl text-center font-medium mb-2 sm:mb-0 sm:mr-4">
+        <Dialog.Overlay className="dialog-overlay" />
+        <Dialog.Content className="dialog-content contentShow w-[350px] sm:w-[500px] md:max-w-lg lg:max-w-3xl max-md:max-w-lg focus:outline-none">
+          <div className="mb-5 flex flex-row items-center justify-between">
+            <Dialog.Title className="font-display text-3xl leading-none text-slate-900">
               Create a new Link
             </Dialog.Title>
             <Dialog.Close className="flex flex-end justify-end">
-              <div className="p-2 rounded-full flex justify-center items-center bg-gray-100 hover:bg-gray-300">
+              <div className="surface-card flex items-center justify-center rounded-full p-2">
                 <Image priority src={closeSVG} alt="close" />
               </div>
             </Dialog.Close>
@@ -85,7 +85,7 @@ const AddLinkModal = () => {
               <input
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
-                className="block w-full h-10 px-4 py-6 mb-2 leading-tight text-gray-700 border rounded-2xl appearance-none focus:outline-none focus:shadow-outline"
+                className="input-shell"
                 id="name"
                 type="text"
                 placeholder="Title"
@@ -95,9 +95,7 @@ const AddLinkModal = () => {
               <input
                 value={url}
                 onChange={handleUrlChange}
-                className={`block w-full h-10 px-4 py-6 mb-2 leading-tight text-gray-700 border rounded-2xl appearance-none focus:outline-none ${
-                  urlError ? 'border-red-500' : 'focus:shadow-outline'
-                }`}
+                className={`input-shell ${urlError ? 'border-red-500' : ''}`}
                 id="url"
                 type="url"
                 placeholder="URL"
@@ -121,7 +119,7 @@ const AddLinkModal = () => {
               <Switch.Root
                 checked={isSocial}
                 onCheckedChange={() => setIsSocial(!isSocial)}
-                className="w-[39px] h-[21px] bg-[#E4E4E7] rounded-full relative focus:shadow-black border border-slate-200 data-[state=checked]:bg-slate-900 outline-none cursor-default lg:w-[42px] lg:h-[25px]"
+                className="relative h-[21px] w-[39px] cursor-default rounded-full border border-slate-200 bg-[#E4E4E7] outline-none data-[state=checked]:bg-slate-900 lg:h-[25px] lg:w-[42px]"
               >
                 <Switch.Thumb className="block w-[17px] h-[17px] bg-white rounded-full shadow-[0_2px_2px] transition-transform duration-100 translate-x-0.5 will-change-transform data-[state=checked]:translate-x-[19px] lg:w-[21px] lg:h-[21px]" />
               </Switch.Root>
@@ -131,7 +129,7 @@ const AddLinkModal = () => {
               <button
                 onClick={submitLink}
                 disabled={urlError}
-                className={`inline-block w-full px-4 py-4 leading-none 
+                className={`action-primary mt-2 inline-flex w-full justify-center 
                      			 text-lg mt-2 text-white rounded-3xl 
                       			${
                               !urlError

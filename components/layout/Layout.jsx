@@ -7,21 +7,22 @@ const Layout = ({children}) => {
   const router = useRouter();
 
   return (
-    <>
-      <section className="fixed overflow-hidden">
+    <section className="min-h-screen px-4 py-4 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-[1600px]">
         <Navbar showName={false} isHomePage={false} />
-        <main className="bg-[#F9FAFB] flex flex-row h-screen z-0 ">
-          {children}
+        <main className="mt-4 grid gap-4 lg:grid-cols-[minmax(0,1fr)_360px]">
+          <div className="surface-card-strong min-h-[calc(100vh-8rem)] overflow-hidden rounded-[2.5rem]">
+            {children}
+          </div>
           {router.pathname != '/admin/analytics' && (
-            <div className="hidden lg:my-auto lg:block lg:basis-2/5 pl-4">
+            <div className="hidden lg:block">
               <Preview />
             </div>
           )}
-
-          <PreviewBtn />
         </main>
-      </section>
-    </>
+        <PreviewBtn />
+      </div>
+    </section>
   );
 };
 

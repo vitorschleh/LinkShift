@@ -5,7 +5,7 @@ import { signOut } from 'next-auth/react';
 import { useRouter } from 'next/router';
 import { toast } from 'react-hot-toast';
 import Link from 'next/link';
-import { User, LogOut, AlertCircle } from 'lucide-react';
+import { ArrowUpRight, LogOut, MessageCircle, User } from 'lucide-react';
 import useMediaQuery from '@/hooks/use-media-query';
 import { Drawer } from 'vaul';
 import UserNavButtonMobile from './usernavbutton-mobile';
@@ -46,29 +46,33 @@ const UserAccountNavDesktop = () => {
 
         <Popover.Portal>
           <Popover.Content
-            className="z-50 w-[130px] mr-2 items-center rounded-md border border-gray-200 bg-white drop-shadow-lg md:block lg:w-[150px]"
+            className="surface-card-strong z-50 mr-2 w-[220px] rounded-[1.5rem] p-2 md:block"
             sideOffset={4}
           >
             <Link
               href="/admin/settings"
-              className="group flex w-full items-center gap-2 rounded-md p-3 text-sm font-medium text-gray-500 transition-all duration-75 hover:bg-gray-100"
+              className="group flex w-full items-center gap-3 rounded-[1.1rem] p-3 text-sm font-medium text-ink/70 transition hover:bg-white/60"
             >
-              <User size={17} color="gray" />
-              <h4 className="w-full truncate">{data.user.name}</h4>
+              <User size={17} />
+              <div className="min-w-0 flex-1">
+                <h4 className="truncate text-ink">{data.user.name}</h4>
+                <p className="truncate text-xs text-ink/45">@{data.user.handle}</p>
+              </div>
+              <ArrowUpRight size={15} />
             </Link>
             <Link
               target="_blank"
               href="https://github.com/urdadx/librelinks/issues/new/choose"
-              className="group flex w-full items-center gap-2 rounded-md p-3 text-sm font-medium text-gray-500 transition-all duration-75 hover:bg-gray-100"
+              className="group flex w-full items-center gap-3 rounded-[1.1rem] p-3 text-sm font-medium text-ink/70 transition hover:bg-white/60"
             >
-              <AlertCircle size={17} color="gray" />
-              <h4>Feedback</h4>
+              <MessageCircle size={17} />
+              <h4>Send feedback</h4>
             </Link>
             <button
               onClick={handleLogout}
-              className="group flex w-full items-center gap-2 rounded-md p-3 text-sm font-medium text-red-400 transition-all duration-75 hover:bg-red-500 hover:text-white"
+              className="group flex w-full items-center gap-3 rounded-[1.1rem] p-3 text-sm font-medium text-red-500 transition hover:bg-red-500 hover:text-white"
             >
-              <LogOut size={17} className="text-b-400 hover:text-white" />
+              <LogOut size={17} />
               <h4>Sign out</h4>
             </button>
           </Popover.Content>

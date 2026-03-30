@@ -8,6 +8,21 @@ import { Provider } from 'react-wrap-balancer';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Analytics } from '@vercel/analytics/react';
+import {
+  Cormorant_Garamond,
+  Plus_Jakarta_Sans,
+} from 'next/font/google';
+
+const sans = Plus_Jakarta_Sans({
+  subsets: ['latin'],
+  variable: '--font-sans',
+});
+
+const display = Cormorant_Garamond({
+  subsets: ['latin'],
+  variable: '--font-display',
+  weight: ['400', '500', '600', '700'],
+});
 
 export default function App({ Component, pageProps }) {
   const router = useRouter();
@@ -49,14 +64,27 @@ export default function App({ Component, pageProps }) {
   }, [router.events]);
 
   return (
-    <>
+    <div className={`${sans.variable} ${display.variable}`}>
       <NProgress
         isRouteChanging={state.isRouteChanging}
         key={state.loadingKey}
       />
       <Analytics />
       <QueryClientProvider client={queryClient}>
-        <Toaster toastOptions={{ duration: 2500 }} position="bottom-center" />
+        <Toaster
+          toastOptions={{
+            duration: 2500,
+            style: {
+              background: 'rgba(22, 18, 15, 0.88)',
+              color: '#fdf8f1',
+              border: '1px solid rgba(255, 255, 255, 0.08)',
+              borderRadius: '1.25rem',
+              boxShadow: '0 24px 80px rgba(23, 20, 17, 0.26)',
+              backdropFilter: 'blur(16px)',
+            },
+          }}
+          position="bottom-center"
+        />
         <SessionProvider session={pageProps.session}>
           <Provider>
             <Component {...pageProps} />
@@ -64,6 +92,6 @@ export default function App({ Component, pageProps }) {
         </SessionProvider>
         <ReactQueryDevtools initialIsOpen={false} />
       </QueryClientProvider>
-    </>
+    </div>
   );
 }

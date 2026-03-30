@@ -3,19 +3,19 @@ import * as AlertDialog from '@radix-ui/react-alert-dialog';
 
 const CustomAlert = ({ title, action, desc, confirmMsg, close }) => (
   <AlertDialog.Portal>
-    <AlertDialog.Overlay className="fixed inset-0 backdrop-blur-sm bg-gray-800 bg-opacity-50 sm:w-full" />
-    <AlertDialog.Content className="contentShow fixed top-[50%] left-[50%] max-h-[85vh] w-[90vw] max-w-[500px] translate-x-[-50%] translate-y-[-50%] rounded-xl bg-white p-[25px]">
-      <AlertDialog.Title className="text-slate-900 m-0 text-[17px] font-medium">
+    <AlertDialog.Overlay className="dialog-overlay" />
+    <AlertDialog.Content className="dialog-content contentShow max-h-[85vh] max-w-[500px]">
+      <AlertDialog.Title className="m-0 font-display text-3xl leading-none text-slate-900">
         {title}
       </AlertDialog.Title>
-      <AlertDialog.Description className="text-slate-900 mt-4 mb-5 text-[15px] leading-normal">
+      <AlertDialog.Description className="mb-6 mt-4 text-[15px] leading-relaxed text-slate-700">
         {desc}
       </AlertDialog.Description>
-      <div className="flex justify-end gap-[25px]">
+      <div className="flex flex-col-reverse gap-3 sm:flex-row sm:justify-end">
         <AlertDialog.Cancel asChild>
           <button
             onClick={close}
-            className="text-slate-900 bg-gray-50 hover:bg-gray-200 inline-flex h-[35px] items-center justify-center rounded-[4px] px-[15px] font-medium leading-none outline-none focus:shadow-[0_0_0_2px]"
+            className="action-secondary"
           >
             Cancel
           </button>
@@ -23,7 +23,7 @@ const CustomAlert = ({ title, action, desc, confirmMsg, close }) => (
         <AlertDialog.Action asChild>
           <button
             onClick={action}
-            className="text-white focus:shadow-slate-400 bg-slate-900 hover:bg-slate-700 inline-flex h-[37px] items-center justify-center rounded-[4px] px-[15px] font-medium leading-none outline-none focus:shadow-[0_0_0_2px]"
+            className="action-primary"
           >
             {confirmMsg}
           </button>

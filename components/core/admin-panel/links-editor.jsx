@@ -78,22 +78,28 @@ const LinksEditor = () => {
       onDragEnd={handleDragEnd}
       modifiers={[restrictToVerticalAxis]}
     >
-      <div className="max-w-[640px] mx-auto my-10">
+      <div className="mx-auto my-6 max-w-[760px]">
+        <div className="mb-6 flex items-end justify-between gap-4">
+          <div>
+            <h3 className="font-display text-4xl leading-none text-ink">Links</h3>
+            <p className="mt-2 text-sm text-ink/60">
+              Arrange your destinations, tweak their details and keep the page
+              feeling intentional.
+            </p>
+          </div>
+        </div>
         <Dialog.Root>
           <Dialog.Trigger asChild>
-            <div className="">
-              <button
-                className="bg-slate-900 w-full font-medium flex justify-center gap-1 
-                				items-center h-12 px-8 rounded-3xl text-white hover:bg-slate-700"
-              >
-                <Plus /> Add link
+            <div>
+              <button className="action-primary flex w-full items-center justify-center gap-2">
+                <Plus size={18} /> Add link
               </button>
             </div>
           </Dialog.Trigger>
           <AddLinkModal />
         </Dialog.Root>
 
-        <div className="my-10">
+        <div className="my-8">
           {!isLoading
             ? userLinks?.map(({ id, ...userLink }) => (
                 <React.Fragment key={id}>
@@ -115,19 +121,20 @@ const LinksEditor = () => {
               ))
             : Array.from({ length: 4 }).map((_, i) => <LinkSkeleton key={i} />)}
           {!isLoading && userLinks?.length === 0 && (
-            <div className="mt-4 w-[245px] h-auto flex flex-col mx-auto">
+            <div className="surface-card mx-auto mt-4 flex h-auto w-full max-w-md flex-col rounded-[2rem] p-6 text-center">
               <Image
-                className="object-cover"
-                width="220"
-                height="220"
+                className="mx-auto object-cover"
+                width="180"
+                height="180"
                 alt="not-found"
                 src="/assets/not-found.png"
               />
-              <h3 className="font-bold text-lg mt-3 text-[#222]">
+              <h3 className="mt-4 font-display text-3xl leading-none text-[#222]">
                 You don&apos;t have any links yet
               </h3>
-              <p className="text-sm text-[#555] text-center px-3">
-                Please click on the button above to add your first link 🚀
+              <p className="mt-3 px-3 text-sm text-[#555]">
+                Start with your strongest destination and build the rest around
+                it.
               </p>
             </div>
           )}

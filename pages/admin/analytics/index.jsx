@@ -7,11 +7,11 @@ const Analytics = () => {
   return (
     <>
       <Head>
-        <title>Librelinks | Analytics</title>
+        <title>LinkShift | Analytics</title>
       </Head>
       <Layout>
-        <div className="w-full lg:w-[100vw] pl-4 pr-4 overflow-auto">
-          <div className="max-w-[700px] mx-auto my-10">
+        <div className="h-full overflow-auto px-4 py-6 sm:px-6">
+          <div className="mx-auto my-6 max-w-[820px]">
             <AnalyticsDashboard />
           </div>
           <Footer />

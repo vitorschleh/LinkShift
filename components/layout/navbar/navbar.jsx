@@ -1,66 +1,78 @@
 import Link from 'next/link';
 import * as Dialog from '@radix-ui/react-dialog';
-import { Wand, Link2, BarChart, CircleDot, Settings2 } from 'lucide-react';
+import {
+  BarChart3,
+  CircleDot,
+  Link2,
+  Settings2,
+} from 'lucide-react';
 import { useSession } from 'next-auth/react';
 import UserAccountNavDesktop from '@/components/utils/usernavbutton-desktop';
 import ShareButton from '@/components/utils/share-button';
 import SiteHeader from './main-nav';
 import ShareModal from '@/components/shared/modals/share-modal';
 import React from 'react';
+import { useRouter } from 'next/router';
 
 const items = [
   {
     title: 'Links',
     href: '/admin',
-    icon: <Link2 color="black" size={18} />,
+    icon: Link2,
   },
 
   {
     title: 'Customize',
     href: '/admin/customize',
-    icon: <CircleDot size={18} />,
+    icon: CircleDot,
   },
 
   {
     title: 'Analytics',
     href: '/admin/analytics',
-    icon: <BarChart color="black" size={18} />,
+    icon: BarChart3,
   },
   {
     title: 'Settings',
     href: '/admin/settings',
-    icon: <Settings2 color="black" size={18} />,
+    icon: Settings2,
   },
 ];
 
 const Navbar = ({ showName = false, isHomePage = true }) => {
   const session = useSession();
+  const router = useRouter();
 
   return (
-    <>
-      <header className=" z-40 top-0 w-[100vw] border-b border-b-slate-200 bg-white">
-        <div className="flex items-center justify-between h-16 px-4 sm:px-6 lg:px-8">
-          <div className="flex gap-6 items-center">
-            <Wand color="black" size={30} />
-            <div className="hidden sm:flex sm:items-center sm:space-x-6">
-              {!showName ? (
-                items.map((item) => (
-                  <nav key={item.title} className="rounded-xl">
-                    <Link href={item.href}>
-                      <div className="bg-transparent p-2 flex space-x-2 items-center hover:bg-slate-100 rounded-xl">
-                        {item.icon}
-                        <span className="">{item.title}</span>
-                      </div>
+    <div className="sticky top-4 z-40">
+      <header className="surface-card-strong rounded-[2rem] px-4 py-3 sm:px-5">
+        <div className="flex items-center justify-between gap-4">
+          <div className="flex items-center gap-5">
+            <SiteHeader />
+            <div className="hidden md:flex md:items-center md:gap-2">
+              {!showName &&
+                items.map((item) => {
+                  const isActive = router.pathname === item.href;
+                  const Icon = item.icon;
+
+                  return (
+                    <Link
+                      key={item.title}
+                      href={item.href}
+                      className={`inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-medium transition ${
+                        isActive
+                          ? 'bg-[#171411] text-white shadow-float'
+                          : 'text-ink/60 hover:bg-white/60 hover:text-ink'
+                      }`}
+                    >
+                      <Icon size={16} />
+                      <span>{item.title}</span>
                     </Link>
-                  </nav>
-                ))
-              ) : (
-                <SiteHeader />
-              )}
+                  );
+                })}
             </div>
           </div>
-
-          <div className="flex items-center">
+          <div className="flex items-center gap-2">
             {session.status === 'authenticated' && (
               <div className="flex items-center gap-2">
                 <Dialog.Root>
@@ -74,28 +86,32 @@ const Navbar = ({ showName = false, isHomePage = true }) => {
             )}
           </div>
         </div>
-        {!session.status === 'authenticated' || !isHomePage ? (
-          <div className="flex items-center justify-center border border-t-gray-200 lg:hidden md:hidden">
-            <div className="flex items-center space-x-6 p-1">
-              {items?.map((item) => (
-                <React.Fragment key={item.title}>
-                  <nav key={item.title} className="rounded-xl">
-                    <Link href={item.href}>
-                      <div className="bg-transparent p-2 flex flex-col items-center hover:bg-slate-100 rounded-xl">
-                        {item.icon}
-                        <span className="text-sm">{item.title}</span>
-                      </div>
-                    </Link>
-                  </nav>
-                </React.Fragment>
-              ))}
-            </div>
-          </div>
-        ) : (
-          ''
-        )}
       </header>
-    </>
+      {session.status === 'authenticated' && !isHomePage && (
+        <nav className="fixed bottom-5 left-1/2 z-40 flex -translate-x-1/2 gap-1 rounded-full border border-white/60 bg-[#fbf7f0]/90 p-2 shadow-float backdrop-blur-xl md:hidden">
+          {items.map((item) => {
+            const isActive = router.pathname === item.href;
+            const Icon = item.icon;
+
+            return (
+              <React.Fragment key={item.title}>
+                <Link
+                  href={item.href}
+                  className={`flex min-w-[72px] flex-col items-center gap-1 rounded-full px-3 py-2 text-[0.7rem] font-medium uppercase tracking-[0.12em] transition ${
+                    isActive
+                      ? 'bg-[#171411] text-white'
+                      : 'text-ink/55 hover:bg-white/70'
+                  }`}
+                >
+                  <Icon size={16} />
+                  <span>{item.title}</span>
+                </Link>
+              </React.Fragment>
+            );
+          })}
+        </nav>
+      )}
+    </div>
   );
 };
 

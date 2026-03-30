@@ -24,15 +24,40 @@ export function AnalyticsDashboard() {
   const { data: locationAnalytics } = useLocationAnalytics(currentUser?.handle);
   const { data: deviceAnalytics } = useDeviceAnalytics(currentUser?.handle);
 
+  const selectStyles = {
+    control: (base, state) => ({
+      ...base,
+      borderRadius: 999,
+      borderColor: state.isFocused ? '#7d654c' : 'rgba(23, 20, 17, 0.08)',
+      boxShadow: '0 12px 36px rgba(23, 20, 17, 0.08)',
+      backgroundColor: 'rgba(255,255,255,0.58)',
+      paddingInline: 4,
+      minHeight: 46,
+    }),
+    menu: (base) => ({
+      ...base,
+      borderRadius: 20,
+      overflow: 'hidden',
+    }),
+  };
+
   return (
     <>
-      <div className="flex w-full items-center justify-between">
-        <h3 className="text-xl font-semibold">Analytics</h3>
+      <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+        <div>
+          <h3 className="font-display text-4xl leading-none text-ink">
+            Analytics
+          </h3>
+          <p className="mt-2 text-sm text-ink/60">
+            A calmer read on what is actually driving attention.
+          </p>
+        </div>
         <Select
           onChange={(option) => setFilter(option.value)}
-          className="w-[170px]"
+          className="w-[190px]"
           defaultValue={options[0]}
           options={options}
+          styles={selectStyles}
         />
       </div>
       <Chart analytics={visitAnalytics} />

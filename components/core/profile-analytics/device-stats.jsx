@@ -7,10 +7,10 @@ export const DeviceStats = ({ analytics }) => {
 
   return (
     <div className="mt-10 w-full">
-      <h3 className="text-xl font-semibold text-inherit mb-4">
-        Device Analytics
+      <h3 className="mb-4 font-display text-4xl leading-none text-ink">
+        Devices
       </h3>
-      <div className="rounded-xl border bg-white p-4">
+      <div className="surface-card rounded-[2rem] p-4">
         <div className="mb-4">
           <h3 className="font-semibold text-md px-3 pb-1">Devices</h3>
           <p className="text-gray-500 text-sm px-3">

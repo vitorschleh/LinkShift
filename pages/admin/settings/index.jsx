@@ -115,15 +115,25 @@ const Settings = () => {
   return (
     <>
       <Head>
-        <title>Librelinks | Settings</title>
+        <title>LinkShift | Settings</title>
       </Head>
       <Layout>
-        <div className="w-full lg:basis-3/5 pl-4 pr-4 border-r overflow-scroll">
-          <div className="max-w-[690px] mx-auto my-10">
-            <h3 className="text-xl font-semibold">Profile</h3>
-            <div className="mt-4 rounded-2xl border bg-white p-lg w-full h-auto pb-10">
-              <div className="flex flex-col lg:flex-row gap-x-6 p-10">
-                <div className="w-[100px] h-[100px] pb-6 rounded-full flex items-center mx-auto">
+        <div className="h-full overflow-auto px-4 py-6 sm:px-6">
+          <div className="mx-auto my-6 max-w-[760px]">
+            <div className="flex items-end justify-between gap-4">
+              <div>
+                <h3 className="font-display text-4xl leading-none text-ink">
+                  Profile
+                </h3>
+                <p className="mt-2 text-sm text-ink/60">
+                  Refine your presence, image and the public details people see
+                  first.
+                </p>
+              </div>
+            </div>
+            <div className="surface-card-strong mt-4 w-full rounded-[2rem] p-6 pb-8">
+              <div className="flex flex-col gap-x-6 gap-y-6 lg:flex-row lg:p-4">
+                <div className="mx-auto flex h-[100px] w-[100px] items-center rounded-full pb-0 lg:pb-6">
                   {fetchedUser ? (
                     <UserAvatarSetting />
                   ) : (
@@ -134,7 +144,7 @@ const Settings = () => {
                   <div className="relative overflow-hidden">
                     <Dialog.Root>
                       <Dialog.Trigger asChild>
-                        <button className="relative w-full lg:w-[490px] h-[45px] border rounded-3xl border-[#000] outline-none text-white bg-slate-900 p-2 hover:bg-slate-700">
+                        <button className="action-primary w-full lg:w-[490px]">
                           Pick an image
                         </button>
                       </Dialog.Trigger>
@@ -147,20 +157,19 @@ const Settings = () => {
                   </div>
                   <button
                     onClick={handleDeletePfp}
-                    className="w-full lg:w-[490px] h-[45px] border border-[#aaa] 
-                    outline-none font-semibold text-slate-900 bg-white p-2 rounded-3xl hover:bg-gray-100"
+                    className="action-secondary w-full lg:w-[490px]"
                   >
                     Remove
                   </button>
                 </div>
               </div>
-              <div className="flex flex-col gap-4 max-w-[640px] mx-auto px-4">
+              <div className="mx-auto flex max-w-[640px] flex-col gap-4 px-1 lg:px-4">
                 <input
                   value={username ?? ''}
                   onChange={(e) => setUsername(e.target.value)}
                   onBlur={handleSubmit}
                   placeholder="@Username"
-                  className="outline-none w-full p-4 h-[50px] rounded-lg border-2 bg-gray-100 text-black focus:border-slate-900"
+                  className="input-shell"
                 />
 
                 <textarea
@@ -168,27 +177,27 @@ const Settings = () => {
                   onChange={(e) => setBio(e.target.value)}
                   onBlur={handleSubmit}
                   placeholder="@Bio"
-                  className="outline-none w-full p-4 h-[120px] rounded-lg border-2
-                bg-gray-100 text-black focus:border-slate-900"
+                  className="textarea-shell"
                 />
               </div>
             </div>
           </div>
 
-          <div className="max-w-[690px] mx-auto my-10">
-            <h3 className="text-xl font-semibold mb-1">Danger Zone</h3>
-            <h3 className="mb-4 text-gray-600 text-sm">
+          <div className="mx-auto my-10 max-w-[760px]">
+            <h3 className="font-display text-4xl leading-none text-ink">
+              Danger Zone
+            </h3>
+            <h3 className="mb-4 mt-2 text-sm text-gray-600">
               <Balancer>
                 Deleting your account permanently deletes your page and all your
                 data.
               </Balancer>
             </h3>
-            <div className="w-full h-auto border bg-white rounded-lg p-6 ">
+            <div className="surface-card-strong h-auto w-full rounded-[2rem] p-6">
               <AlertDialog.Root>
                 <AlertDialog.Trigger asChild>
                   <button
-                    className="border-none w-full lg:w-[200px] rounded-lg h-auto p-3
-									  text-white bg-red-600 hover:bg-red-500"
+                    className="inline-flex w-full justify-center rounded-full bg-red-600 px-4 py-3 text-white transition hover:bg-red-500 lg:w-[220px]"
                   >
                     Delete Account
                   </button>

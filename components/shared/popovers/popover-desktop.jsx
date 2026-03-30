@@ -128,14 +128,14 @@ const PopoverDesktop = ({ id, title, url, archived }) => {
       )}
       <PopoverPrimitive.Portal>
         <PopoverPrimitive.Content
-          className="w-[120px] items-center rounded-md border border-gray-200 mr-2 bg-white drop-shadow-lg md:block lg:w-[150px]"
+          className="surface-card-strong mr-2 w-[170px] rounded-[1.4rem] p-2 md:block"
           sideOffset={4}
         >
           <Dialog.Root>
             <Dialog.Trigger asChild>
-              <button className="group flex w-full items-center justify-between rounded-md p-3 text-sm font-medium text-gray-500 transition-all duration-75 hover:bg-gray-100">
+              <button className="group flex w-full items-center justify-between rounded-[1rem] p-3 text-sm font-medium text-ink/70 transition hover:bg-white/60">
                 <h4>Edit</h4>
-                <Edit size={17} color="gray" />
+                <Edit size={17} />
               </button>
             </Dialog.Trigger>
             <EditLinkModal
@@ -147,18 +147,18 @@ const PopoverDesktop = ({ id, title, url, archived }) => {
           </Dialog.Root>
           <AlertDialog.Root>
             <AlertDialog.Trigger asChild>
-              <button className="group flex w-full items-center justify-between rounded-md p-3 text-sm font-medium text-gray-500 transition-all duration-75 hover:bg-gray-100">
+              <button className="group flex w-full items-center justify-between rounded-[1rem] p-3 text-sm font-medium text-ink/70 transition hover:bg-white/60">
                 <h4>{!isArchived ? 'Archive' : 'Unarchive'}</h4>
-                <ArchiveIcon size={17} color="gray" />
+                <ArchiveIcon size={17} />
               </button>
             </AlertDialog.Trigger>
             <CustomAlert {...archiveProps} />
           </AlertDialog.Root>
           <AlertDialog.Root>
             <AlertDialog.Trigger asChild>
-              <button className="group flex w-full items-center justify-between rounded-md p-3 text-sm font-medium text-red-400 transition-all duration-75 hover:bg-red-500 hover:text-white">
+              <button className="group flex w-full items-center justify-between rounded-[1rem] p-3 text-sm font-medium text-red-500 transition hover:bg-red-500 hover:text-white">
                 <h4>Delete</h4>
-                <Trash size={17} className="text-b-400 hover:text-white" />
+                <Trash size={17} />
               </button>
             </AlertDialog.Trigger>
             <CustomAlert {...deleteAlertProps} />

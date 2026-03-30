@@ -9,10 +9,10 @@ const Customize = () => {
   return (
     <>
       <Head>
-        <title>Librelinks | Customize</title>
+        <title>LinkShift | Customize</title>
       </Head>
       <Layout>
-        <div className="w-full lg:basis-3/5 pl-4 pr-4 border-r overflow-auto">
+        <div className="h-full overflow-auto px-4 py-6 sm:px-6">
           <ThemesPicker />
           <ButtonSelector />
           <Footer />

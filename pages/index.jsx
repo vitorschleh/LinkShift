@@ -1,56 +1,64 @@
-/* eslint-disable @next/next/no-img-element */
-import GithubStar from '@/components/utils/github-star';
-import { GithubIcon, GlobeIcon, TwitterIcon } from 'lucide-react';
+import BrandMark from '@/components/ui/brand-mark';
+import {
+  ArrowRight,
+  GithubIcon,
+  LayoutDashboard,
+  Palette,
+  Sparkles,
+  Smartphone,
+} from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import Head from 'next/head';
 import { useSession } from 'next-auth/react';
+import { siteConfig } from '@/config/site';
 
-export const metadata = {
-  title: 'Librelinks',
-  description:
-    'Librelinks is an opensource link in bio tool that helps you easily manage your links, transforming your online presence.',
-};
+const highlights = [
+  {
+    title: 'Live mobile preview',
+    description:
+      'Adjust links, theme and button feel while watching the profile update instantly.',
+    icon: Smartphone,
+  },
+  {
+    title: 'Curated customization',
+    description:
+      'Choose premium palettes and tactile button treatments without touching code.',
+    icon: Palette,
+  },
+  {
+    title: 'Quiet analytics',
+    description:
+      'Understand visits, devices and top links inside a calmer, more editorial dashboard.',
+    icon: LayoutDashboard,
+  },
+];
 
 const Home = () => {
   const session = useSession();
-  const isAuthenticated = session.status === 'authenticated' ? true : false;
+  const isAuthenticated = session.status === 'authenticated';
 
   return (
     <>
       <Head>
-        <title>Librelinks | A free & opensource link in bio tool</title>
-        {/* <!-- Open Graph (OG) meta tags --> */}
-        <meta property="og:url" content="https://librelinks.vercel.app/" />
-        <meta property="og:url" content="https://librelinks.me/" />
-        <meta property="og:url" content="https://www.librelinks.me/" />
-        <meta property="og:type" content="website" />
+        <title>LinkShift | Quiet luxury link in bio</title>
         <meta
-          property="og:site_name"
-          content="Librelinks - The free & opensource link in bio tool"
+          name="description"
+          content="LinkShift is a premium link in bio studio with refined themes, live preview and elegant analytics."
         />
-        <meta property="og:title" content="Librelinks" />
+        <meta property="og:url" content="https://librelinks.vercel.app/" />
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="LinkShift" />
+        <meta property="og:title" content="LinkShift" />
         <meta
           property="og:description"
-          content="Librelinks is an opensource link in bio tool that helps you easily manage your links, transforming your online presence."
+          content="A premium link in bio studio with quiet luxury aesthetics, live preview and elegant analytics."
         />
         <meta
           property="og:image"
-          itemprop="image"
-          content="https://librelinks.vercel.app/og.png"
+          itemProp="image"
+          content="https://librelinks.vercel.app/api/og"
         />
-        <meta
-          property="og:image"
-          itemprop="image"
-          content="https://librelinks.me/og.png"
-        />
-        <meta
-          property="og:image"
-          itemprop="image"
-          content="https://www.librelinks.me/og.png"
-        />
-
-        {/* <!-- Twitter Card meta tags --> */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:site" content="@urdadx" />
         <meta name="twitter:creator" content="@urdadx" />
@@ -58,225 +66,188 @@ const Home = () => {
           property="twitter:domain"
           content="https://librelinks.vercel.app/"
         />
-        <meta property="twitter:domain" content="https://librelinks.me/" />
-        <meta property="twitter:domain" content="https://www.librelinks.me/" />
         <meta property="twitter:url" content="https://librelinks.vercel.app/" />
-        <meta name="twitter:title" content="Librelinks" />
+        <meta name="twitter:title" content="LinkShift" />
         <meta
           name="twitter:description"
-          content="Librelinks is an opensource link in bio tool that helps you easily manage your links, transforming your online presence."
+          content="A premium link in bio studio with quiet luxury aesthetics, live preview and elegant analytics."
         />
         <meta
           name="twitter:image"
-          content="https://librelinks.vercel.app/og.png"
+          content="https://librelinks.vercel.app/api/og"
         />
-        <meta name="twitter:image" content="https://librelinks.me/og.png" />
-        <meta name="twitter:image" content="https://www.librelinks.me/og.png" />
         <meta
           data-rh="true"
           name="twitter:image:alt"
-          content="Librelinks is an opensource link in bio tool that helps you easily manage your links, transforming your online presence."
-        />
-
-        {/* <!-- LinkedIn meta tags --> */}
-        <meta
-          property="og:linkedin:image"
-          content="https://librelinks.vercel.app/og.png"
-        />
-        <meta
-          property="og:linkedin:image"
-          content="https://librelinks.me/og.png"
-        />
-        <meta
-          property="og:linkedin:image"
-          content="https://www.librelinks.me/og.png"
-        />
-        <meta property="og:linkedin:title" content="Librelinks" />
-        <meta
-          property="og:linkedin:description"
-          content="Librelinks is an opensource link in bio tool that helps you easily manage your links, transforming your online presence."
-        />
-
-        {/* <!-- Facebook meta tags --> */}
-        <meta
-          property="og:facebook:image"
-          content="https://librelinks.vercel.app/og.png"
-        />
-        <meta
-          property="og:facebook:image"
-          content="https://librelinks.me/og.png"
-        />
-        <meta
-          property="og:facebook:image"
-          content="https://www.librelinks.me/og.png"
-        />
-        <meta property="og:facebook:title" content="Librelinks" />
-        <meta
-          property="og:facebook:description"
-          content="Librelinks is an opensource link in bio tool that helps you easily manage your links, transforming your online presence."
-        />
-
-        {/* <!-- Instagram meta tags --> */}
-        <meta
-          property="og:instagram:image"
-          content="https://librelinks.vercel.app/og.png"
-        />
-        <meta
-          property="og:instagram:image"
-          content="https://librelinks.me/og.png"
-        />
-        <meta
-          property="og:instagram:image"
-          content="https://www.librelinks.me/og.png"
-        />
-        <meta property="og:instagram:title" content="Librelinks" />
-        <meta
-          property="og:instagram:description"
-          content="Librelinks is an opensource link in bio tool that helps you easily manage your links, transforming your online presence."
-        />
-
-        {/* <!-- Pinterest meta tags --> */}
-        <meta
-          property="og:pinterest:image"
-          content="https://librelinks.vercel.app/og.png"
-        />
-        <meta
-          property="og:pinterest:image"
-          content="https://librelinks.me/og.png"
-        />
-        <meta
-          property="og:pinterest:image"
-          content="https://www.librelinks.me/og.png"
-        />
-        <meta property="og:pinterest:title" content="Librelinks" />
-        <meta
-          property="og:pinterest:description"
-          content="Librelinks is an opensource link in bio tool that helps you easily manage your links, transforming your online presence."
+          content="A premium link in bio studio with quiet luxury aesthetics, live preview and elegant analytics."
         />
       </Head>
-      <div className="absolute inset-0 -z-10 h-full w-full bg-white bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:16px_16px]">
-        <div className="relative overflow-hidden">
-          <div
-            className="absolute inset-y-0 w-full h-full"
-            aria-hidden="true"
-          ></div>
-          <div className="relative pt-6 pb-16 sm:pb-24">
-            <div className="px-4 mx-auto max-w-7xl sm:px-6">
-              <nav
-                className="relative flex items-center justify-between md:justify-start"
-                aria-label="Global"
+      <div className="ambient-page relative min-h-screen">
+        <div className="mx-auto max-w-7xl px-4 pb-16 pt-6 sm:px-6 lg:px-8">
+          <header className="surface-card flex items-center justify-between rounded-full px-4 py-3 sm:px-5">
+            <BrandMark showTagline />
+            <div className="flex items-center gap-3">
+              <Link
+                href={siteConfig.links.github}
+                target="_blank"
+                className="action-secondary hidden sm:inline-flex"
               >
-                <Link
-                  className="flex items-center gap-2 font-bold text-xl"
-                  href="/"
-                >
-                  <h3 className="lg:block">Librelinks</h3>
-                </Link>
-
-                <div className="relative items-center w-28 z-10 md:absolute md:inset-y-0 md:right-0">
-                  <Link
-                    className="group inline-flex items-center gap-2 px-4 text-sm  bg-slate-900 border rounded-3xl text-white w-[116px] h-[35px] justify-center font-semibold transition-colors hover:bg-slate-700"
-                    rel="noopener noreferrer"
-                    href="/admin"
-                  >
-                    {isAuthenticated ? 'Admin' : 'Login'}
-                  </Link>
-                </div>
-              </nav>
+                <GithubIcon size={16} />
+                Star on GitHub
+              </Link>
+              <Link
+                href={isAuthenticated ? '/admin' : '/login'}
+                className="action-primary"
+              >
+                {isAuthenticated ? 'Open Studio' : 'Enter Studio'}
+              </Link>
             </div>
-            <div className="px-4 mx-auto mt-24 max-w-7xl sm:mt-16 sm:px-6">
-              <div className="flex justify-center items-center mb-6">
-                <a
-                  className="group inline-flex items-center gap-2 px-4 py-4 text-sm bg-gray-50 border rounded-3xl text-gray-500 w-[180px] h-[35px] justify-center transition-colors hover:bg-gray-100"
+          </header>
+
+          <main className="grid gap-12 pb-10 pt-12 lg:grid-cols-[1.05fr_0.95fr] lg:items-center lg:pt-20">
+            <section className="max-w-2xl">
+              <span className="section-kicker">Premium link atelier</span>
+              <h1 className="section-title mt-6 text-ink">
+                The link in bio that feels designed, not assembled.
+              </h1>
+              <p className="muted-copy mt-6 max-w-xl text-base leading-relaxed sm:text-lg">
+                LinkShift turns your links, socials and analytics into a calm,
+                luxurious mobile presence with live customization and refined
+                motion.
+              </p>
+              <div className="mt-8 flex flex-wrap gap-3">
+                <Link href="/register" className="action-primary">
+                  Create your page
+                  <ArrowRight size={16} />
+                </Link>
+                <Link
+                  href={siteConfig.links.github}
                   target="_blank"
-                  rel="noopener noreferrer"
-                  href="https://github.com/urdadx/librelinks"
+                  className="action-secondary"
                 >
-                  <div className="">
-                    <GithubStar />
-                  </div>{' '}
-                  Star us on Github
-                </a>
+                  Explore the repo
+                </Link>
               </div>
-              <div className="text-center">
-                <h1 className="text-4xl font-extrabold tracking-tight text-gray-900 sm:text-5xl md:text-6xl">
-                  <span className="block">The free & opensource</span>
-                  <span className="hero-title block ">link in bio tool</span>
-                </h1>
-                <p className="max-w-md mx-auto mt-3 text-base text-gray-500 sm:text-lg md:mt-5 md:text-xl md:max-w-3xl">
-                  Librelinks is an opensource link in bio tool that helps you
-                  easily manage your links, transforming your online presence.
-                </p>
+
+              <div className="mt-10 grid gap-3 sm:grid-cols-3">
+                <div className="surface-card rounded-[1.75rem] p-4">
+                  <p className="text-[0.72rem] uppercase tracking-[0.22em] text-ink/45">
+                    Crafted
+                  </p>
+                  <p className="mt-3 font-display text-3xl leading-none text-ink">
+                    8
+                  </p>
+                  <p className="mt-2 text-sm text-ink/60">
+                    curated premium themes
+                  </p>
+                </div>
+                <div className="surface-card rounded-[1.75rem] p-4">
+                  <p className="text-[0.72rem] uppercase tracking-[0.22em] text-ink/45">
+                    Synced
+                  </p>
+                  <p className="mt-3 font-display text-3xl leading-none text-ink">
+                    Live
+                  </p>
+                  <p className="mt-2 text-sm text-ink/60">
+                    preview while you edit
+                  </p>
+                </div>
+                <div className="surface-card rounded-[1.75rem] p-4">
+                  <p className="text-[0.72rem] uppercase tracking-[0.22em] text-ink/45">
+                    Ready
+                  </p>
+                  <p className="mt-3 font-display text-3xl leading-none text-ink">
+                    Calm
+                  </p>
+                  <p className="mt-2 text-sm text-ink/60">
+                    analytics and sharing
+                  </p>
+                </div>
               </div>
-              <div className="flex justify-center mt-6">
-                <div className="flex flex-col items-center">
-                  <span className="inline-flex rounded-xl shadow">
-                    <Link legacyBehavior href="/register">
-                      <a className="inline-flex items-center px-4 py-2 font-medium text-lg gradient-btn border border-transparent rounded-xl text-white w-[190px] h-[50px] justify-center hover:shadow-lg">
-                        Get started
-                      </a>
-                    </Link>
+            </section>
+
+            <section className="relative">
+              <div className="surface-card-strong rounded-[2.75rem] p-4 sm:p-5">
+                <div className="mb-4 flex items-center justify-between px-2">
+                  <div>
+                    <p className="text-[0.72rem] uppercase tracking-[0.22em] text-ink/45">
+                      Mobile showcase
+                    </p>
+                    <h2 className="font-display text-3xl leading-none text-ink">
+                      Quiet luxury UI
+                    </h2>
+                  </div>
+                  <span className="floating-chip text-[0.72rem] uppercase tracking-[0.2em]">
+                    iOS glass
                   </span>
                 </div>
+                <div className="device-shell mx-auto max-w-[23rem] p-3 pt-12">
+                  <div className="overflow-hidden rounded-[2rem]">
+                    <Image
+                      className="h-auto w-full rounded-[2rem] object-cover"
+                      src="/assets/new_shot.png"
+                      alt="LinkShift mobile studio preview"
+                      height={900}
+                      width={720}
+                      priority
+                    />
+                  </div>
+                </div>
+              </div>
+            </section>
+          </main>
+
+          <section className="mt-10 grid gap-4 lg:grid-cols-3">
+            {highlights.map(({ title, description, icon: Icon }) => (
+              <article
+                key={title}
+                className="surface-card rounded-[2rem] px-5 py-6"
+              >
+                <div className="flex h-12 w-12 items-center justify-center rounded-[1.2rem] bg-white/70 shadow-halo">
+                  <Icon size={20} className="text-[#6f563f]" />
+                </div>
+                <h3 className="mt-5 font-display text-3xl leading-none text-ink">
+                  {title}
+                </h3>
+                <p className="mt-3 text-sm leading-relaxed text-ink/60 sm:text-base">
+                  {description}
+                </p>
+              </article>
+            ))}
+          </section>
+
+          <section className="mt-16">
+            <div className="surface-card-strong rounded-[2.5rem] px-6 py-8 text-center sm:px-10 sm:py-10">
+              <span className="section-kicker justify-center">Signature feel</span>
+              <h2 className="section-title mt-6 text-ink">
+                Build a page that feels like a brand, not a list.
+              </h2>
+              <p className="muted-copy mx-auto mt-5 max-w-2xl text-base leading-relaxed">
+                LinkShift brings together premium themes, link management and a
+                preview-first editor so every touchpoint feels intentionally
+                designed.
+              </p>
+              <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
+                <Link href="/register" className="action-primary">
+                  Start free
+                </Link>
+                <Link href="/login" className="action-secondary">
+                  Sign in
+                </Link>
               </div>
             </div>
-          </div>
-          <div className="relative">
-            <div className="absolute inset-0 flex flex-col" aria-hidden="true">
-              <div className="flex-1" />
-              <div className="flex-1 w-full bg-slate-900 " />
+          </section>
+
+          <footer className="mt-14 flex flex-col items-center gap-4 pb-4 text-center">
+            <div className="floating-chip">
+              <Sparkles size={14} />
+              Designed by @urdadx
             </div>
-            <div className="px-4 mx-auto max-w-7xl sm:px-6">
-              <Image
-                className="relative rounded-lg shadow-lg"
-                src="/assets/new_shot.png"
-                alt="App screenshot"
-                height={700}
-                width={1200}
-              />
-            </div>
-          </div>
-        </div>
-        <div className="bg-slate-900">
-          <div className="px-4 py-16 mx-auto max-w-7xl sm:py-24 sm:px-6 lg:px-8">
-            <h2 className="text-lg font-semibold tracking-wide text-center text-gray-400">
-              Made by{' '}
-              <a
-                className="hover:text-emerald-500"
-                target="_blank"
-                rel="noopener noreferrer"
-                href="https://twitter.com/NerdyProgramme2"
-              >
-                @urdadx
-              </a>
-            </h2>
-            <div className="flex items-center gap-4 justify-center mt-4">
-              <a
-                href="https://x.com/NerdyProgramme2"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="twitter logo"
-              >
-                <TwitterIcon color="white" />
-              </a>
-              <a
-                href="https://github.com/urdadx"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="github logo"
-              >
-                <GithubIcon color="white" />
-              </a>
-              <a
-                href="https://urdadx.vercel.app/"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="insta logo"
-              >
-                <GlobeIcon color="white" />
-              </a>
-            </div>
-          </div>
+            <p className="text-sm text-ink/50">
+              LinkShift keeps the original open-source spirit and wraps it in a
+              more refined interface system.
+            </p>
+          </footer>
         </div>
       </div>
     </>

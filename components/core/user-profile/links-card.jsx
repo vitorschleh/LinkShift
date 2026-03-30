@@ -1,15 +1,32 @@
-import Image from 'next/image';
+/* eslint-disable @next/next/no-img-element */
+import { ArrowUpRight } from 'lucide-react';
+import { getApexDomain } from '@/utils/helpers';
+import {
+  getButtonVariantStyles,
+  hexToRgba,
+  resolveThemeTokens,
+} from '@/utils/themes';
 
 const LinkCard = (props) => {
-  const isTransparent = props.buttonStyle.includes('bg-transparent');
-  const hasShadowProp = props.buttonStyle.includes('shadow');
+  if (props.archived) {
+    return null;
+  }
 
-  const style = {
-    background: isTransparent ? 'transparent' : props.theme.secondary,
-    display: props.archived ? 'none' : 'flex',
-    border: `1.5px solid ${props.theme.neutral}`,
-    boxShadow: hasShadowProp ? `5px 5px 0 0 ${props.theme.neutral}` : '',
-  };
+  const theme =
+    props.theme?.background && props.theme?.text
+      ? props.theme
+      : resolveThemeTokens(props.theme);
+  const { variant, style } = getButtonVariantStyles(props.buttonStyle, theme);
+  const domain = getApexDomain(props.url) || props.url;
+  const detailColor =
+    variant === 'soft-solid'
+      ? hexToRgba(theme.background, 0.72)
+      : theme.textMuted;
+  const accentFill =
+    variant === 'soft-solid'
+      ? hexToRgba(theme.background, 0.14)
+      : theme.accentSoft;
+  const accentColor = variant === 'soft-solid' ? theme.background : theme.accent;
 
   return (
     <a
@@ -17,28 +34,54 @@ const LinkCard = (props) => {
       onClick={props.registerClicks}
       target="_blank"
       rel="noopener noreferrer"
-      className={`flex items-center ${props.buttonStyle} hover:scale-105 transition-all border mb-3 w-full sm:w-64 md:w-72 lg:w-96 xl:w-3/4 2xl:w-3/5 max-w-3xl lg:p-1 lg:mb-6`}
+      className="group flex w-full items-center gap-4 overflow-hidden rounded-[1.8rem] px-4 py-4 sm:px-5 sm:py-5 transition-all duration-300 hover:-translate-y-1"
       style={style}
     >
-      <div className="flex text-center w-full">
-        <div className="w-10 h-10">
-          {props.image && (
-            <Image
-              className="rounded-full"
-              alt={props.title}
-              src={props.image}
-              width={40}
-              height={40}
-            />
-          )}
-        </div>
+      <div
+        className="flex h-12 w-12 shrink-0 items-center justify-center overflow-hidden rounded-[1.2rem] border"
+        style={{
+          background: variant === 'soft-solid' ? accentFill : theme.badgeFill,
+          borderColor:
+            variant === 'soft-solid'
+              ? hexToRgba(theme.background, 0.18)
+              : theme.badgeBorder,
+        }}
+      >
+        {props.image ? (
+          <img
+            className="h-full w-full object-cover"
+            alt={props.title}
+            src={props.image}
+          />
+        ) : (
+          <span className="font-display text-2xl" style={{ color: accentColor }}>
+            {props.title?.charAt(0)?.toUpperCase() || 'L'}
+          </span>
+        )}
+      </div>
+      <div className="min-w-0 flex-1">
         <h2
-          style={{ color: props.theme.accent }}
-          className="text-[13px] flex justify-center items-center font-semibold w-full text-gray-700 -ml-10 lg:text-lg"
+          className="truncate-soft text-sm font-semibold sm:text-base"
+          style={{ color: style.color }}
         >
           {props.title}
         </h2>
+        <p
+          className="truncate-soft mt-1 text-xs font-medium sm:text-sm"
+          style={{ color: detailColor }}
+        >
+          {domain}
+        </p>
       </div>
+      <span
+        className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+        style={{
+          background: accentFill,
+          color: accentColor,
+        }}
+      >
+        <ArrowUpRight size={18} />
+      </span>
     </a>
   );
 };

@@ -9,8 +9,11 @@ export const UserAvatar = () => {
   return (
     <>
       <Avatar.Root
-        className="inline-flex h-[35px] w-[35px] border-2 border-blue-300
-				 items-center justify-center overflow-hidden rounded-full align-middle lg:w-[45px] lg:h-[45px]"
+        className="inline-flex h-[42px] w-[42px] items-center justify-center overflow-hidden rounded-[1.1rem] border align-middle shadow-float lg:h-[46px] lg:w-[46px]"
+        style={{
+          background: 'rgba(255,255,255,0.5)',
+          borderColor: 'rgba(255,255,255,0.62)',
+        }}
       >
         <Avatar.Image
           className="h-full w-full rounded-[inherit] object-cover"
@@ -19,7 +22,7 @@ export const UserAvatar = () => {
           alt="avatar"
         />
         <Avatar.Fallback
-          className="leading-1 text-slate-900 flex h-full w-full items-center justify-center bg-white text-[15px] font-medium"
+          className="leading-1 flex h-full w-full items-center justify-center bg-white/70 font-display text-[18px] text-slate-900"
           delayMs={100}
         >
           @
@@ -36,8 +39,11 @@ export const UserAvatarSetting = () => {
   return (
     <>
       <Avatar.Root
-        className="inline-flex h-[100px] w-[100px] 
-				 items-center justify-center overflow-hidden rounded-full align-middle border-2 border-blue-400"
+        className="inline-flex h-[100px] w-[100px] items-center justify-center overflow-hidden rounded-[2rem] border align-middle shadow-float"
+        style={{
+          background: 'rgba(255,255,255,0.52)',
+          borderColor: 'rgba(255,255,255,0.62)',
+        }}
       >
         <Avatar.Image
           className="h-full w-full rounded-[inherit] object-cover"
@@ -46,7 +52,7 @@ export const UserAvatarSetting = () => {
           alt="avatar"
         />
         <Avatar.Fallback
-          className="leading-1 flex h-full w-full items-center justify-center bg-white text-slate-900 text-[35px] font-medium"
+          className="leading-1 flex h-full w-full items-center justify-center bg-white/70 font-display text-[35px] text-slate-900"
           delayMs={100}
         >
           @

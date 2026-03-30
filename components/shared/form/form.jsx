@@ -17,7 +17,7 @@ export default function Form({ type }) {
   }, [searchParams]);
 
   return (
-    <div className="flex flex-col space-y-4 bg-gray-50 px-4 py-8 sm:px-16">
+    <div className="flex flex-col space-y-5 bg-white/10 px-6 py-8 sm:px-10">
       <button
         onClick={() => {
           setIsLoading(true);
@@ -27,9 +27,9 @@ export default function Form({ type }) {
         }}
         className={`${
           isLoading
-            ? 'cursor-not-allowed border-gray-200 bg-gray-100'
-            : 'border-black bg-black text-white hover:bg-white hover:text-black'
-        } flex h-10 w-full items-center justify-center rounded-md border text-sm transition-all focus:outline-none`}
+            ? 'cursor-not-allowed border-black/5 bg-white/60 text-ink/40'
+            : 'border-black/5 bg-[#171411] text-white hover:-translate-y-0.5 hover:bg-[#211b17]'
+        } flex h-14 w-full items-center justify-center rounded-full border text-sm transition-all focus:outline-none`}
       >
         {isLoading ? (
           <LoadingDots color="#808080" />
@@ -41,16 +41,16 @@ export default function Form({ type }) {
       </button>
 
       {type === 'login' ? (
-        <p className="text-center text-sm text-gray-600">
+        <p className="text-center text-sm text-ink/55">
           Don&apos;t have an account?{' '}
-          <Link href="/register" className="font-semibold text-gray-800">
+          <Link href="/register" className="font-semibold text-ink">
             Sign up
           </Link>
         </p>
       ) : (
-        <p className="text-center text-sm text-gray-600">
+        <p className="text-center text-sm text-ink/55">
           Already have an account?{' '}
-          <Link href="/login" className="font-semibold text-gray-800">
+          <Link href="/login" className="font-semibold text-ink">
             Sign in
           </Link>
         </p>

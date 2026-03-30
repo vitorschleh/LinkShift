@@ -59,20 +59,18 @@ const EditLinkModal = ({ id, title, url, close }) => {
     <>
       <div>
         <Dialog.Portal>
-          <Dialog.Overlay className="fixed inset-0 backdrop-blur-sm bg-gray-800 bg-opacity-50 sm:w-full" />
+          <Dialog.Overlay className="dialog-overlay" />
           <Dialog.Content
-            className=" contentShow fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 
-                		rounded-2xl bg-white p-6 sm:p-8 lg:max-w-3xl w-[350px] sm:w-[500px] shadow-lg 
-               			md:max-w-lg max-md:max-w-lg focus:outline-none"
+            className="dialog-content contentShow w-[350px] sm:w-[500px] md:max-w-lg lg:max-w-3xl max-md:max-w-lg focus:outline-none"
           >
-            <div className="flex flex-row justify-between items-center mb-4">
-              <Dialog.Title className="text-xl text-center font-medium mb-2 sm:mb-0 sm:mr-4">
+            <div className="mb-5 flex flex-row items-center justify-between">
+              <Dialog.Title className="font-display text-3xl leading-none text-slate-900">
                 Edit Link
               </Dialog.Title>
               <Dialog.Close className="flex flex-end justify-end">
                 <div
                   onClick={close}
-                  className="p-2 rounded-full flex justify-center items-center bg-gray-100 hover:bg-gray-300"
+                  className="surface-card flex items-center justify-center rounded-full p-2"
                 >
                   <Image priority src={closeSVG} alt="close" />
                 </div>
@@ -83,7 +81,7 @@ const EditLinkModal = ({ id, title, url, close }) => {
                 <input
                   value={newTitle}
                   onChange={(e) => setNewTitle(e.target.value)}
-                  className="block w-full h-10 px-4 py-6 mb-2 leading-tight text-gray-700 border rounded-2xl appearance-none focus:outline-none focus:shadow-outline"
+                  className="input-shell"
                   id="name"
                   type="text"
                   placeholder="Title"
@@ -93,7 +91,7 @@ const EditLinkModal = ({ id, title, url, close }) => {
                 <input
                   value={newUrl}
                   onChange={handleUrlChange}
-                  className="block w-full h-10 px-4 py-6 mb-2 leading-tight text-gray-700 border rounded-2xl appearance-none focus:outline-none focus:shadow-outline"
+                  className={`input-shell ${urlError ? 'border-red-500' : ''}`}
                   id="name"
                   type="url"
                   placeholder="URL"
@@ -108,7 +106,7 @@ const EditLinkModal = ({ id, title, url, close }) => {
               <Dialog.Close asChild>
                 <button
                   onClick={handleEditLink}
-                  className="inline-block w-full px-4 py-4 leading-none 
+                  className="action-primary mt-2 inline-flex w-full justify-center 
                         			text-lg mt-2 text-white bg-slate-800 hover:bg-slate-900 rounded-3xl 
                         			focus:outline-none focus:shadow-outline-blue"
                 >

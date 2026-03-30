@@ -27,11 +27,11 @@ const LinkStats = () => {
   return (
     <>
       <div className="mt-10 w-full">
-        <h3 className="text-xl font-semibold">Top performing links</h3>
-        <div className="rounded-xl mt-4 border bg-white h-auto p-4">
+        <h3 className="font-display text-4xl leading-none text-ink">Top links</h3>
+        <div className="surface-card mt-4 h-auto rounded-[2rem] p-4">
           <div className="">
-            <h3 className="font-semibold text-md px-3 pb-1">My Links</h3>
-            <p className="text-gray-500 text-sm px-3 mb-2">
+            <h3 className="px-3 pb-1 text-md font-semibold">My Links</h3>
+            <p className="mb-2 px-3 text-sm text-gray-500">
               Get useful insights on each link
             </p>
           </div>
@@ -45,7 +45,7 @@ const LinkStats = () => {
                     .map((userLink) => (
                       <div
                         key={userLink.id}
-                        className="flex items-center p-2 rounded-lg"
+                        className="flex items-center rounded-[1.4rem] p-3"
                       >
                         <div className="h-8 w-8">
                           <img
@@ -91,14 +91,14 @@ const LinkStats = () => {
                   <div className="flex justify-center mt-2">
                     {showAll ? (
                       <button
-                        className="text-blue-500 font-medium"
+                        className="font-medium text-[#7d654c]"
                         onClick={handleShowLess}
                       >
                         Show Less
                       </button>
                     ) : (
                       <button
-                        className="text-blue-500 font-medium"
+                        className="font-medium text-[#7d654c]"
                         onClick={handleShowMore}
                       >
                         Show More

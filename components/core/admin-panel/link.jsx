@@ -33,10 +33,10 @@ const LinkCard = (props) => {
       <div
         ref={setNodeRef}
         style={style}
-        className=" flex bg-white items-center p-2 rounded-lg drop-shadow-md my-5"
+        className="surface-card my-4 flex items-center gap-3 rounded-[1.8rem] p-3 sm:p-4"
       >
         <div
-          className=" text-gray-400 text-sm hover:bg-blue-100 rounded-sm p-[3px]"
+          className="rounded-full p-2 text-sm text-gray-400 transition hover:bg-white/70"
           {...attributes}
           {...listeners}
         >
@@ -46,7 +46,7 @@ const LinkCard = (props) => {
           <Image
             src={`${GOOGLE_FAVICON_URL}${apexDomain}`}
             alt={apexDomain}
-            className="h-8 w-8 blur-0 rounded-full sm:h-10 sm:w-10"
+            className="h-10 w-10 rounded-[1rem] object-cover sm:h-12 sm:w-12"
             unoptimized
             width={20}
             height={20}
@@ -58,69 +58,51 @@ const LinkCard = (props) => {
             component={<ArchiveSVG />}
           />
         )}
-        <div className="flex-1 p-2 h-full relative">
-          <div className="flex">
-            <div className="w-full pr-3">
-              <div className="grid mb-1 w-full grid-cols-[minmax(0,_90%)] items-baseline">
-                <div className=" w-full row-start-1 col-start-1 items-center">
-                  <div
-                    target="_blank"
-                    className="flex items-center max-w-full rounded-[2px] outline-offset-2 outline-2 gap-2 lg:gap-4"
-                  >
-                    <p className="truncate w-fit max-w-[80px] text-gray-500 text-sm whitespace-nowrap overflow-hidden font-semibold lg:w-fit lg:max-w-[150px]">
-                      {props.title}
-                    </p>
+        <div className="relative flex-1">
+          <div className="flex flex-col gap-3 lg:flex-row lg:items-start lg:justify-between">
+            <div className="min-w-0 flex-1 pr-3">
+              <div className="flex flex-wrap items-center gap-2">
+                <p className="truncate-soft max-w-[180px] text-sm font-semibold text-ink sm:max-w-[280px]">
+                  {props.title}
+                </p>
+                <span className="rounded-full bg-white/70 px-3 py-1 text-[0.65rem] uppercase tracking-[0.18em] text-ink/50">
+                  {apexDomain}
+                </span>
+              </div>
+              <a
+                target="_blank"
+                href={props.url}
+                className="mt-2 inline-flex max-w-full rounded-[2px] outline-2 outline-offset-2"
+              >
+                <p className="truncate-soft w-[220px] text-sm font-medium text-ink/50 lg:w-[360px]">
+                  {props.url}
+                </p>
+              </a>
+              <div className="mt-3 flex flex-wrap gap-2">
+                <Link
+                  onClick={handleCopyLink}
+                  href="#"
+                  className="surface-card flex items-center gap-2 rounded-full px-3 py-2 text-xs font-medium uppercase tracking-[0.18em] text-ink/55"
+                >
+                  <Copy size={14} />
+                  Copy
+                </Link>
 
-                    <div className="flex justify-between items-start">
-                      <div className="flex flex-wrap gap-2">
-                        <Link
-                          onClick={handleCopyLink}
-                          href="#"
-                          className="group rounded-full bg-gray-100 p-1.5 transition-all duration-75 hover:scale-105 hover:bg-blue-100 active:scale-95"
-                        >
-                          <Copy color="grey" size={15} />
-                        </Link>
-
-                        <Link
-                          href="/admin/analytics"
-                          className="flex items-center space-x-1 rounded-md bg-gray-100 px-2 py-0.5 transition-all duration-75 hover:scale-105 hover:bg-blue-100 active:scale-100"
-                        >
-                          <BarChart color="grey" size={15} />
-                          <p className="whitespace-nowrap text-sm text-gray-500">
-                            {props.clicks}
-                            <span className="ml-1 hidden sm:inline-block">
-                              clicks
-                            </span>
-                          </p>
-                        </Link>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="">
-                  <div className="row-start-1 col-start-1 inline-flex">
-                    <a
-                      target="_blank"
-                      href={props.url}
-                      className="flex items-center max-w-full rounded-[2px] outline-offset-2 outline-2"
-                    >
-                      <p className="text-gray-500 w-[200px] text-sm lg:w-[320px] whitespace-nowrap overflow-hidden font-semibold text-ellipsis">
-                        {props.url}
-                      </p>
-                    </a>
-                  </div>
-                </div>
+                <Link
+                  href="/admin/analytics"
+                  className="surface-card flex items-center gap-2 rounded-full px-3 py-2 text-xs font-medium uppercase tracking-[0.18em] text-ink/55"
+                >
+                  <BarChart size={14} />
+                  {props.clicks} clicks
+                </Link>
               </div>
             </div>
-            <button className="flex justify-center items-center ">
-              <div className="flex items-center">
-                <small className="mr-8 hidden whitespace-nowrap text-sm text-gray-500 sm:block">
-                  Added {timeAgo(props.createdAt, true)}
-                </small>
-                <PopoverDesktop {...props} />
-              </div>
-            </button>
+            <div className="flex items-center justify-between gap-3 lg:justify-end">
+              <small className="whitespace-nowrap text-xs uppercase tracking-[0.18em] text-ink/45 sm:block">
+                Added {timeAgo(props.createdAt, true)}
+              </small>
+              <PopoverDesktop {...props} />
+            </div>
           </div>
         </div>
       </div>

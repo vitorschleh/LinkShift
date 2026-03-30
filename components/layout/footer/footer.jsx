@@ -6,14 +6,10 @@ const Footer = () => {
 
   return (
     <>
-      <footer className="relative mt-12 mb-20 left-1/2 bottom-2 transform -translate-x-1/2 w-[200px]">
-        <p className="mt-10 mb-4 text-black text-semibold text-center text-lg">
-          Made by{' '}
-          <Link
-            className="text-blue-800"
-            target="_blank"
-            href="https://twitter.com/NerdyProgramme2"
-          >
+      <footer className="mt-10 flex items-center justify-center">
+        <p className="floating-chip text-center text-xs uppercase tracking-[0.2em]">
+          Crafted by{' '}
+          <Link target="_blank" href="https://twitter.com/NerdyProgramme2">
             @urdadx
           </Link>
         </p>

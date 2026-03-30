@@ -5,6 +5,7 @@ import { TinyLoader } from '@/components/utils/tiny-loader';
 import { useRouter } from 'next/router';
 import Confetti from 'react-dom-confetti';
 import Balancer from 'react-wrap-balancer';
+import BrandMark from '@/components/ui/brand-mark';
 
 const Onboarding = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -64,74 +65,72 @@ const Onboarding = () => {
     setHandleTaken(false);
   };
   return (
-    <>
-      <div
-        className="absolute inset-0 bg-[url(../public/grid.svg)] bg-center 
-       			[mask-image:linear-gradient(180deg,rgba(255,255,255,0))] bg-repeat"
-      />
-      <div className="absolute w-full flex min-h-full flex-1 flex-col justify-center px-6 py-6 lg:px-8">
-        <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-          <div className="mx-auto h-[30px] w-[30px] bg-slate-900 rounded-full" />
-          <h2 className="mt-4 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
-            <Balancer>Claim your unique handle ✨</Balancer>
+    <div className="ambient-page flex min-h-screen items-center justify-center px-4 py-10">
+      <div className="surface-card-strong w-full max-w-md rounded-[2.5rem] px-6 py-8 sm:px-8 sm:py-10">
+        <div className="text-center">
+          <BrandMark href="/" showTagline className="justify-center" />
+          <span className="section-kicker mt-8 justify-center">
+            Claim your handle
+          </span>
+          <h2 className="mt-6 font-display text-4xl leading-none text-ink">
+            <Balancer>Make it unmistakably yours</Balancer>
           </h2>
+          <p className="mt-4 text-sm leading-relaxed text-ink/60 sm:text-base">
+            Choose the handle that will sit on your LinkShift page, QR codes
+            and share links.
+          </p>
         </div>
-        <div className="mt-4 sm:mx-auto sm:w-full sm:max-w-sm">
+        <div className="mt-8">
           <form onSubmit={handleAddHandle}>
-            <div className="space-y-6">
+            <div className="space-y-5">
               <div>
-                <div className="flex items-center justify-between">
-                  <label
-                    for="handle"
-                    htmlFor="handle"
-                    className="block text-sm font-medium leading-6 text-gray-700"
-                  >
-                    Type your handle
-                  </label>
-                </div>
+                <label
+                  htmlFor="handle"
+                  className="block text-sm font-medium leading-6 text-ink/70"
+                >
+                  Choose your public handle
+                </label>
                 <div className="mt-2 flex justify-center">
                   <input
                     id="handle"
-                    placeholder="ex: naruto"
+                    placeholder="ex: atelier.links"
                     value={handle}
                     onChange={handleOnChange}
                     type="text"
                     required
-                    className="block w-full rounded-md border border-gray-400 px-3 py-2 ring-offset-gray-200 focus-visible:ring-1 sm:text-sm focus:outline-none focus-visible:ring-offset-2 sm:leading-6"
+                    className="input-shell"
                   />
                 </div>
                 {handleTaken && (
-                  <small className="text-red-500">
+                  <small className="mt-2 block text-red-500">
                     {handle} is not available
                   </small>
                 )}
               </div>
             </div>
 
-            <div className="mt-4">
+            <div className="mt-5">
               <button
                 disabled={isLoading}
                 onClick={handleAddHandle}
-                className="flex w-full justify-center rounded-md bg-slate-900 px-3 py-2.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-slate-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-slate-600"
+                className="action-primary flex w-full"
               >
                 {isLoading ? (
-                  <>
-                    <div className="flex justify-center w-[100px]">
-                      <TinyLoader color="white" size={20} stroke={2} />
-                    </div>
-                  </>
+                  <div className="flex w-[100px] justify-center">
+                    <TinyLoader color="white" size={20} stroke={2} />
+                  </div>
                 ) : (
-                  <span className="text-md">Submit 🚀</span>
+                  <span className="text-md">Reserve handle</span>
                 )}
               </button>
             </div>
-            <div className="w-full hidden justify-center h-full lg:flex">
+            <div className="hidden h-full w-full justify-center lg:flex">
               <Confetti active={isExploding} config={config} />
             </div>
           </form>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

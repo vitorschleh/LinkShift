@@ -9,21 +9,14 @@ const PreviewBtn = () => {
     setIsOpen((prevState) => !prevState);
   };
 
-  // Get current screen height
-  const drawerHeight =
-    typeof window !== 'undefined'
-      ? Math.max(document.documentElement.clientHeight, window.innerHeight || 0)
-      : null;
-
   return (
     <>
-      <div className="fixed bottom-4 left-1/2 transform -translate-x-1/2 lg:hidden">
+      <div className="fixed bottom-6 left-1/2 z-40 -translate-x-1/2 lg:hidden">
         <button
           onClick={toggleDrawer}
-          className="block py-2 px-6 rounded-full bg-slate-700 first-letter
-					text-white text-center font-bold text-lg shadow-lg hover:bg-slate-600"
+          className="surface-card flex items-center gap-2 rounded-full px-5 py-3 text-sm font-semibold uppercase tracking-[0.18em] text-ink"
         >
-          Preview
+          Open Preview
         </button>
       </div>
 
@@ -32,7 +25,7 @@ const PreviewBtn = () => {
         open={isOpen}
         onClose={toggleDrawer}
         direction="bottom"
-        size={'90vh'}
+        size={'92vh'}
         className="overflow-auto h-[100vh]"
       >
         <PreviewMobile close={toggleDrawer} />

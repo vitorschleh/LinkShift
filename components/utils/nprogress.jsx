@@ -15,8 +15,8 @@ const NProgress = ({ isRouteChanging }) => {
         }
 
         .bar {
-          background: #27d;
-          height: 3px;
+          background: linear-gradient(90deg, #6f563f 0%, #b69774 45%, #4e4147 100%);
+          height: 4px;
           left: 0;
           margin-left: ${(-1 + progress) * 100}%;
           position: fixed;
@@ -34,6 +34,7 @@ const NProgress = ({ isRouteChanging }) => {
           right: 0;
           transform: rotate(3deg) translate(0px, -4px);
           width: 100px;
+          box-shadow: 0 0 30px rgba(167, 131, 91, 0.8);
         }
       `}</style>
       <div className="container">

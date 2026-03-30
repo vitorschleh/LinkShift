@@ -68,18 +68,16 @@ const UploadModal = ({ onChange, value, submit }) => {
   return (
     <>
       <Dialog.Portal>
-        <Dialog.Overlay className="fixed inset-0 backdrop-blur-sm bg-gray-800 bg-opacity-50 sm:w-full" />
+        <Dialog.Overlay className="dialog-overlay" />
         <Dialog.Content
-          className="contentShow z-40 fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 
-                    rounded-2xl bg-white p-6 sm:p-8 lg:max-w-3xl w-[350px] sm:w-[500px] shadow-lg 
-                    md:max-w-lg max-md:max-w-lg focus:outline-none"
+          className="dialog-content contentShow z-40 w-[350px] sm:w-[500px] md:max-w-lg lg:max-w-3xl max-md:max-w-lg focus:outline-none"
         >
-          <div className="flex flex-row justify-between items-center mb-4">
-            <Dialog.Title className="text-xl text-center font-medium mb-2 sm:mb-0 sm:mr-4">
+          <div className="mb-5 flex flex-row items-center justify-between">
+            <Dialog.Title className="font-display text-3xl leading-none text-slate-900">
               Upload Image
             </Dialog.Title>
             <Dialog.Close className="flex flex-end justify-end">
-              <div className="p-2 rounded-full flex justify-center items-center bg-gray-100 hover:bg-gray-300">
+              <div className="surface-card flex items-center justify-center rounded-full p-2">
                 <Image priority src={closeSVG} alt="close" />
               </div>
             </Dialog.Close>
@@ -87,7 +85,7 @@ const UploadModal = ({ onChange, value, submit }) => {
           <div
             {...getRootProps({
               className:
-                'w-full h-[200px] flex justify-center border-2 border-dashed rounded-md p-10 my-4',
+                'surface-card my-4 flex h-[220px] w-full justify-center rounded-[1.6rem] border border-dashed p-10',
             })}
           >
             <input
@@ -101,13 +99,16 @@ const UploadModal = ({ onChange, value, submit }) => {
                   <img
                     alt="uploaded-image"
                     loading="lazy"
-                    className="overflow-hidden border-2 border-blue-500 object-cover w-[100px] h-[100px] rounded-full"
+                    className="h-[110px] w-[110px] overflow-hidden rounded-[1.8rem] border object-cover"
+                    style={{
+                      borderColor: 'rgba(23, 20, 17, 0.08)',
+                    }}
                     src={base64}
                   />
                 </div>
                 <a
                   href="#"
-                  className="text-sm text-center text-blue-900 mt-4 hover:underline"
+                  className="mt-4 text-center text-sm text-ink/70 hover:underline"
                 >
                   Change photo
                 </a>
@@ -115,7 +116,7 @@ const UploadModal = ({ onChange, value, submit }) => {
             ) : (
               <>
                 <div className="mb-4">
-                  <h3 className="text-center text-slate-800 text-md font-semibold mb-2 sm:text-lg">
+                  <h3 className="mb-2 text-center text-md font-semibold text-slate-800 sm:text-lg">
                     Choose files or drag and drop
                   </h3>
                   <h3 className="text-center text-slate-800">
@@ -131,7 +132,7 @@ const UploadModal = ({ onChange, value, submit }) => {
           <Dialog.Close asChild>
             <button
               onClick={handleUploadPfp}
-              className="inline-block w-full px-4 py-4 bg-slate-900 leading-none text-lg mt-2 text-white rounded-3xl hover:bg-slate-700"
+              className="action-primary mt-2 inline-flex w-full justify-center"
             >
               Upload image{' '}
               <span role="img" aria-label="rocket">

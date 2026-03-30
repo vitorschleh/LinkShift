@@ -12,13 +12,19 @@ import { getCurrentBaseURL } from '@/utils/helpers';
 const ShareModal = () => {
   const { data: currentUser } = useCurrentUser();
   const baseURL = getCurrentBaseURL();
-  const userProfileLink = `${baseURL}/${currentUser?.handle}`;
+  const userProfileLink =
+    baseURL && currentUser?.handle ? `${baseURL}/${currentUser.handle}` : '';
 
   const [isCopied, setIsCopied] = useState(false);
 
   const goTo = siteConfig.redirects;
 
   const handleCopyLink = () => {
+    if (!userProfileLink) {
+      toast.error('Profile link unavailable');
+      return;
+    }
+
     navigator.clipboard.writeText(userProfileLink);
     setIsCopied(true);
     toast.success('Copied URL to clipboard!');
@@ -29,6 +35,9 @@ const ShareModal = () => {
 
   const downloadQRCode = () => {
     const canvas = document.getElementById('qr-code');
+    if (!canvas) {
+      return;
+    }
     const pngUrl = canvas
       .toDataURL('image/png')
       .replace('image/png', 'image/octet-stream');
@@ -46,35 +55,33 @@ const ShareModal = () => {
     <>
       <div>
         <Dialog.Portal>
-          <Dialog.Overlay className="fixed inset-0 backdrop-blur-sm bg-gray-800 bg-opacity-50 sm:w-full" />
+          <Dialog.Overlay className="dialog-overlay" />
           <Dialog.Content
-            className="contentShow fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 
-                rounded-2xl bg-white p-6 sm:p-8 lg:max-w-3xl w-[350px] sm:w-[500px] shadow-lg 
-                md:max-w-lg max-md:max-w-lg focus:outline-none"
+            className="dialog-content contentShow w-[350px] sm:w-[500px] md:max-w-lg lg:max-w-3xl max-md:max-w-lg focus:outline-none"
           >
-            <div className="flex flex-row justify-between items-center mb-1">
-              <Dialog.Title className="text-xl text-center font-medium mb-2 sm:mb-0 sm:mr-4">
+            <div className="mb-3 flex flex-row items-center justify-between">
+              <Dialog.Title className="font-display text-3xl leading-none text-slate-900">
                 Share your Link
               </Dialog.Title>
 
               <Dialog.Close className="flex flex-end justify-end">
-                <div className="flex justify-center items-center p-2 rounded-full bg-gray-100 hover:bg-gray-300">
+                <div className="surface-card flex items-center justify-center rounded-full p-2">
                   <Image priority src={closeSVG} alt="close" />
                 </div>
               </Dialog.Close>
             </div>
 
             <Tabs.Root defaultValue="url" className="w-full rounded-md mt-4">
-              <Tabs.List className="flex h-10 items-center rounded-md bg-gray-100 p-1 text-slate-900">
+              <Tabs.List className="surface-card flex h-12 items-center rounded-full p-1 text-slate-900">
                 <Tabs.Trigger
                   value="url"
-                  className="flex-1 py-1 px-4 rounded-md text-center data-[state=active]:text-slate-900 data-[state=active]:font-medium data-[state=active]:bg-white text-gray-600"
+                  className="flex-1 rounded-full px-4 py-2 text-center text-gray-600 data-[state=active]:bg-white data-[state=active]:font-medium data-[state=active]:text-slate-900"
                 >
                   URL
                 </Tabs.Trigger>
                 <Tabs.Trigger
                   value="QR"
-                  className="flex-1 py-1 px-4 rounded-md text-center data-[state=active]:text-slate-900 data-[state=active]:font-medium  data-[state=active]:bg-white text-gray-600"
+                  className="flex-1 rounded-full px-4 py-2 text-center text-gray-600 data-[state=active]:bg-white data-[state=active]:font-medium data-[state=active]:text-slate-900"
                 >
                   QR Code
                 </Tabs.Trigger>
@@ -116,13 +123,13 @@ const ShareModal = () => {
                       </p>
                     </div>
                     <div className="relative mb-4">
-                      <div className="flex justify-between items-center w-full h-6 px-4 py-[28px] mb-2 text-gray-700 border-2 rounded-2xl appearance-none focus:outline-none focus:shadow-outline">
+                      <div className="surface-card flex h-6 w-full items-center justify-between rounded-[1.6rem] px-4 py-[28px] text-gray-700">
                         <h2 className="truncate w-[250px] lg:w-full">
                           {userProfileLink}
                         </h2>
                         <button
                           onClick={handleCopyLink}
-                          className="w-[80px] p-[12px] leading-none text-md text-white bg-slate-900 hover:bg-slate-700 rounded-3xl focus:outline-none focus:shadow-outline-blue"
+                          className="action-primary w-[88px]"
                         >
                           {isCopied ? 'Copied' : 'Copy'}
                         </button>
@@ -155,8 +162,7 @@ const ShareModal = () => {
                   </p>
                   <button
                     onClick={downloadQRCode}
-                    className="mt-4 w-full py-3 px-4 text-center text-white bg-slate-900 hover:bg-slate-700
-					          rounded-md focus:outline-none focus:shadow-outline-blue"
+                    className="action-primary mt-4 flex w-full justify-center"
                   >
                     Download QR Code
                   </button>
